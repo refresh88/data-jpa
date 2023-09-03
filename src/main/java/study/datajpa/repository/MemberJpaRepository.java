@@ -44,5 +44,12 @@ public class MemberJpaRepository {
         return em.find(Member.class, id);
     }
 
+    public List<Member> findByUsernameAndAgeGreaterThen(String username, int age) {
+        return em.createQuery("select m from Member m where m.username = :username and m.age > :age")
+                .setParameter("username", username)
+                .setParameter("age", age)
+                .getResultList();
+    }
+
     // update 메서드가 없는 이유는 jpa는 변경감지로 데이터를 변경하기 때문에 굳이 update 메서드가 필요 없음.
 }

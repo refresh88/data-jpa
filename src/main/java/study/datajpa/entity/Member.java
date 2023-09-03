@@ -15,23 +15,28 @@ public class Member {
     @GeneratedValue
     @Column(name = "member_id")
     private Long id;
-    private String userName;
+    private String username;
     private int age;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "team_id") // 외래키명
     private Team team;
 
-    public Member(String userName) {
-        this.userName = userName;
+    public Member(String username) {
+        this.username = username;
     }
 
     public Member(String username, int age, Team team) {
-        this.userName = username;
+        this.username = username;
         this.age = age;
         if(team != null) {
             changeTeam(team);
         }
+    }
+
+    public Member(String username, int age) {
+        this.username = username;
+        this.age = age;
     }
 
     public void changeTeam(Team team) {
